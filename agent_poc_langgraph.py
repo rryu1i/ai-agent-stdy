@@ -209,7 +209,7 @@ query_gen_prompt = ChatPromptTemplate.from_messages(
     [("system", query_gen_system), ("placeholder", "{messages}")]
 )
 query_gen = query_gen_prompt | ChatOpenAI(model="gpt-4o", temperature=0).bind_tools(
-    [SubmitFinalAnswer]
+    [SubmitFinalAnswer, model_check_query]
 )
 
 
@@ -273,7 +273,7 @@ app = workflow.compile()
 
 
 messages = app.invoke(
-    {"messages": [("user", "quantos customers temos?")]}
+    {"messages": [("user", "qual a cidade com mais clientes?")]}
 )
 json_str = messages["messages"][-1].tool_calls[0]["args"]["final_answer"]
 print(json_str)
