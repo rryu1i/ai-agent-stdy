@@ -17,7 +17,7 @@ class Engine():
 
     def create_engine(self):
         connection_string = f"postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.database}"
-        self.engine = create_engine(connection_string, echo=True)
+        self.engine = create_engine(connection_string)
         return self.engine
     
 
